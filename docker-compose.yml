@@ -31,3 +31,8 @@ services:
         restart: always
         ports:
             - 8081:8080
+
+    redis:
+        image: redis
+        volumes:
+            - ./redis:/data
