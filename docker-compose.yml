@@ -8,9 +8,13 @@ services:
             - APACHE_RUN_USER=#1000
         volumes:
             - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
+            - ./logs/apache:/var/log/apache2
+            - ./config/php:/usr/local/etc/php/custom.d
         ports:
             - 8080:80
         working_dir: ${APP_PATH_CONTAINER}
+        environment:
+            PHP_INI_SCAN_DIR: "/usr/local/etc/php/custom.d:/usr/local/etc/php/conf.d"
 
     db:
         image: mysql:5.7
@@ -19,16 +23,11 @@ services:
             MYSQL_ROOT_PASSWORD: secret
         volumes:
             - ${DB_PATH_HOST}:/var/lib/mysql
+            - ./logs/mysql:/var/log/mysql
+            - ./config/mysql:/etc/mysql/conf.d
 
     adminer:
         image: adminer
         restart: always
         ports:
             - 8081:8080
-
-#    composer:
-#        image: composer/composer
-#        volumes:
-#            - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
-#        working_dir: ${APP_PATH_CONTAINER}
-#        command: composer install
