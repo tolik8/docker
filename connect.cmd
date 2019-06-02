@@ -1,0 +1,1 @@
+docker exec -it dka_web_1 bash
