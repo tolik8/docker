@@ -16,23 +16,25 @@ services:
         environment:
             PHP_INI_SCAN_DIR: "/usr/local/etc/php/custom.d:/usr/local/etc/php/conf.d"
 
-    db:
-        image: mysql:5.7
-        restart: always
-        environment:
-            MYSQL_ROOT_PASSWORD: secret
-        volumes:
-            - ${DB_PATH_HOST}:/var/lib/mysql
-            - ./logs/mysql:/var/log/mysql
-            - ./config/mysql:/etc/mysql/conf.d
-
-    adminer:
-        image: adminer
-        restart: always
-        ports:
-            - 8081:8080
-
-    redis:
-        image: redis
-        volumes:
-            - ./redis:/data
+#    db:
+#        image: mysql:5.7
+#        restart: always
+#        environment:
+#            MYSQL_ROOT_PASSWORD: secret
+#        volumes:
+#            - ${DB_PATH_HOST}:/var/lib/mysql
+#            - ./logs/mysql:/var/log/mysql
+#            - ./config/mysql:/etc/mysql/conf.d
+#
+#    adminer:
+#        image: adminer
+#        restart: always
+#        ports:
+#            - 8081:8080
+#
+#    redis:
+#        image: redis
+#        hostname: redis
+#        volumes:
+#            - ./redis:/data
+#
