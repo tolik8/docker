@@ -1,11 +1,12 @@
 <?php
 
-$dbHost     = '127.0.0.1';
+$dbHost     = '10.19.190.164';
+$dbPort     = '3306';
 $dbName     = 'test';
 $dbUsername = 'root';
 $dbPassword = 'secret';
 $dbCharset  = 'utf8';
-$dbDSN      = 'mysql:host='.$dbHost.';dbname='.$dbName.';charset='.$dbCharset;
+$dbDSN      = 'mysql:host='.$dbHost.';port='.$dbPort.'dbname='.$dbName.';charset='.$dbCharset;
 
 $dbOptions = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -18,3 +19,9 @@ try {
 } catch (PDOException $e) {
     exit ($e->getMessage());
 }
+
+$sql = 'SELECT NOW() dt';
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$rows = $stmt->fetch();
+echo 'Date from MySQL database: ' . $rows['dt'];
